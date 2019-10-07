@@ -12,12 +12,13 @@
     <form method="POST">
         
         {% csrf_token %}
-        <label for ="id_name">Name:</label><br>
-        <input type="text" id="id_name" name="name" /><br>
-        <br>
-         <label for ="id_done">Done:</label><br>
-        <input type="checkbox" id="id_done" name="done" /><br>
-        <br>
+       
+       <!-- Removing form fields from here and replacing with form (forms.py-->
+       <!-- the .as_p will render each field as a <p> so that they appear on 
+            separate lines, otherwise the fields will appear on the same line
+            - i.e. inline -->
+       
+       {{ form.as_p}}
         
         <button type="submit">Save</button>
     </form>

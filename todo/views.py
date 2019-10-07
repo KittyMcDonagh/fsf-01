@@ -1,6 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Item
 
+# Import ItemForm (class = ItemForm created in forms.py)
+from .forms import ItemForm
+
 
 # todo_list view
 def get_todo_list(request):
@@ -11,11 +14,20 @@ def get_todo_list(request):
 def create_an_item(request):
     if request.method=="POST":
         
-        new_item = Item()
-        new_item.name = request.POST.get('name')
-        new_item.done = 'done' in request.POST
-        new_item.save()
+        # ItemForm imported above (class = ItemForm created in forms.py)
+        # POST  is to populate it with the fields we get from the POST in a 
+        # request object, and FILES is used if there are files to be uploaded
         
-        return redirect(get_todo_list)
+        form = ItemForm(request.POST, request.FILES)
         
-    return render(request, "item_form.html")
+        # cause django to validate the form
+        if form.is_valid():
+            form.save()
+            return redirect(get_todo_list)
+    
+    # if it's not a POST request, return an empty form
+    
+    else:
+        form=ItemForm()
+       
+    return render(request, "item_form.html", {'form': form})
