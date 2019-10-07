@@ -54,7 +54,20 @@ def edit_an_item(request, id):
     return render(request, "item_form.html", {'form': form})
     
     
-    
+# Toggle the done status. This will save the setting and reloa the todo_list
+def toggle_status(request, id):
+     
+    # Get the item whose done flag was clicked
+    item = get_object_or_404(Item, pk=id)
+     
+    # Reverse the setting of the done flag, if done make it not done, if 
+    # not done make it done
+    item.done = not item.done
+    item.save()
+     
+    return redirect(get_todo_list)
+     
+     
     
     
     

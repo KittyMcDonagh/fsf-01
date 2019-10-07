@@ -18,12 +18,19 @@
             {% else %}
             <td>{{ item.name }}</td>
             {% endif %}
+            <td>
+                <form method="POST" action="toggle/{{ item.id }}">
+                <!-- We need a csrf_token because we're using POST -->
+                    {% csrf_token %}
+                    <input type="submit" value="Toggle">
+                </form>
+            </td>
             
             <td>
                 <!-- Add a form here for each item on the list to allow edit
                      action="edit", edit will be appended to the root url 
                      {{ item.id }} - each item will have a unique id generated
-                     by django -->
+                     by django. "GET" doesnt need a {% csrf_token %}-->
                 <form method="GET" action="edit/{{ item.id }}">
                     <input type="submit" value="Edit">
                 </form>
