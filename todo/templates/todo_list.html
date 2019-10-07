@@ -18,6 +18,17 @@
             {% else %}
             <td>{{ item.name }}</td>
             {% endif %}
+            
+            <td>
+                <!-- Add a form here for each item on the list to allow edit
+                     action="edit", edit will be appended to the root url 
+                     {{ item.id }} - each item will have a unique id generated
+                     by django -->
+                <form method="GET" action="edit/{{ item.id }}">
+                    <input type="submit" value="Edit">
+                </form>
+            </td>
+        
         </tr>
         {% empty %}
         <p>You have nothing to do! Take the day off :-)</p>

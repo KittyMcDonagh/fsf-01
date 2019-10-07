@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Item
 
 # Import ItemForm (class = ItemForm created in forms.py)
@@ -31,3 +31,35 @@ def create_an_item(request):
         form=ItemForm()
        
     return render(request, "item_form.html", {'form': form})
+
+# Edit a specific item    
+def edit_an_item(request, id):
+    
+# Get the item we just clicked on
+    item = get_object_or_404(Item, pk=id)
+    
+    # If this is the update from item_form.html, save the update
+    if request.method == "POST":
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect(get_todo_list)
+    
+    else:
+        # Display the item that is to be edited
+        # Create a form and pass in "item" as the instance that we want to construct 
+        # the object from 
+        form = ItemForm(instance=item)
+    
+    return render(request, "item_form.html", {'form': form})
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
