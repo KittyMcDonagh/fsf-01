@@ -86,6 +86,7 @@ WSGI_APPLICATION = 'fsf_beg_django.wsgi.application'
 #    }
 # }
 
+
 # DATABASES = {'default': dj_database_url.parse("postgres://ipigmcysdtzaaj:64964c6aed38d8cf8e5e38f153565b5466fd19ee4fda11667ae41468e0693347@ec2-176-34-183-20.eu-west-1.compute.amazonaws.com:5432/db92bk6qu3efm9")}
 DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
